@@ -1,0 +1,188 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage[all]{xy}
+\usepackage{hyperref}
+
+
+\begin{document}
+
+\lhead{{\bf CSCI 3104 \\ Problem Set 4} }
+\rhead{Name: \fbox{Keaton Whitehead} \\ ID: \fbox{104668391} \\ {\bf Profs.\ Grochow \& Layer\\ Spring 2019, CU-Boulder}}
+\renewcommand{\headrulewidth}{0.5pt}
+\phantom{Test}
+
+
+\vspace{-3mm}
+
+\begin{enumerate}
+
+\item Suppose that instead of a {\sl randomized} {\tt QuickSort} we implement
+an {\sl indecisive} {\tt QuickSort}, where the {\tt Partition} function
+alternates between the best and the worst cases. You may assume that {\tt indecisive QuickSort} takes $O(n)$ time on a list of length $n$.
+
+\begin{enumerate}
+    \item (5 pts) Prove the correctness of this version of {\tt QuickSort}.\\
+    \\
+    Proof by Induction: \\
+    \begin{itemize}
+  		\item Base Case: n = 1 which if there is only one element in the array it is sorted
+ 	 	\item We assume that the formula is true for all f(n), because it is a recursive function. After this, the two arrays will be sorted, 				  assuming the {\tt Partition } method works correctly. We can also assume that the pivot will be selected as either the best or the 			  worst position in an alternating manner. Now we will look through the intermediate steps of the {\tt Partition} function where the 			  array is split up into 4 regions, with x being the pivot.
+		\begin{itemize}
+			\item Region 1: values that are $\leq$ x (between location of p and i)
+			\item Region 2: values that are $\textgreater$ x (between location of i+1 and j-1)
+			\item Region 3: unprocessed values (between locations j and r-1)
+			\item Region 4: values that are $\leq$ x (location r)
+		\end{itemize}
+		\item Given these 4 regions we will us a loop invariant to cycle through the for loop for any location k. Here are the loop invariants:
+		\begin{itemize}
+			\item If p $\leq$ k $\leq$ i then A[k] $\leq$ x
+			\item If i+1 $\leq$ k $\leq$ j-1 the A[k] $\textgreater$ x
+			\item If k=r the A[k]=x
+			\begin{itemize}
+				\item {\tt Initialization} - This invariant holds true before the loop begins 
+				\item {\tt Maintenance } - The invariant holds at the (i - 1)th iteration, which will also hold true for the ith iteration
+				\item {\tt Termination} - This proves correctness of Partition
+			\end{itemize}
+		\end{itemize}
+		\item Partition is the same for both the worst and best cases, with the exception that the selection of the pivot is different. Assuming 			  that each iteration will alternate between switching from the worst case to the best case we can say that indecisive QuickSort is 				  correct.
+	\end{itemize}
+    
+    \pagebreak	
+    \item (5 pts) Give the recurrence relation for this version of {\tt
+    QuickSort} and solve for its asymptotic solution. Also, give some intuition
+    (in English) about how the indecisive {\tt Partition} algorithm changes the
+    running time of {\tt QuickSort}.\\
+    \\
+    To understand the recurrence relation for this version of QuickSort we need to first understand the recurrence relations that occurs for both the worst and best cases. To begin we will look at the best case first. For the best case we get a recurrence relation of: 
+    $$T(n) = 2T(n/2) + \theta(n)$$
+    This is written in a format that can be solved using the {\tt Master Theorem}. We can let $a = 2$ and $b = 2$ in the equation of:
+    $$T(n) = aT(n/b) + f(n)$$ 
+    Given the rules of the Master Theorem, we get the second case which tells us that the runtime is $\theta(nlogn)$.//
+    \\
+    For the worst case we get the recurrence relation of:
+    $$T(n) = T(n-1) + T(1) + \theta(n)$$
+    $$T(n) = T(n-1) + \theta(n)$$
+    We can solve this using {\tt unrolling}.
+    $$T(n) = T(n-1) + \theta(n)$$
+    $$T(n) = T(n-2) + T(n-1) + \theta(n)$$
+    $$T(n) = T(n-3) + T(n-2) + T(n-1) + \theta(n)$$
+    $$...$$
+    $$T(n) = \theta(1) + ... + \theta(n-2) + \theta(n-1) + \theta(n)$$
+    Thus the worst-case running time of QuickSort is $\theta({n}^2)$
+    \\
+    \par Now since we know that partition switches from the worst case to the best case we know that the runtime of the program will alternate between these two runtimes. Now I don't know how to prove this any other way than just through words, but if we look at both of the recurrences we can notice how the partition is splitting up the array. So for the best case it is being split in half (i.e. T(n) = 2T({\tt n/2}) + $\theta(n)$) and the worst case is only partitioning the array by one element (i.e. T(n) = T(n-1) + $\theta(n)$). Clearly the best case is going to split off more elements than the worst case will ever be able to. So even though it does alternate between the two cases, the function will be partitioned mainly in the best case. So as we go into to having bigger data sets the running time will be very similar to {\tt nlogn} because the the n-1 partitions will not affect the partitioning as much. 
+    \pagebreak	
+\end{enumerate}
+	
+
+\item Consider the following algorithm that operates on a list of n integers:
+\begin{itemize}
+    \item Divide the $n$ values into $\frac{n}{2}$ pairs.
+    \item Find the max of each pair.
+    \item Repeat until you have the max value of the list
+\end{itemize}
+
+\begin{enumerate}
+    \item (2 pts) Show the steps of the above algorithm for the list $(25, 19, 9, 8, 2, 26, 21, 26, 31, 26, 3, 14)$.\\
+    	 (25$\mid$19)---------(9$\mid$8)----------(2$\mid$26)----------(21$\mid$26)----------(31$\mid$26)----------(3$\mid$14)\\
+		 -----------(25$\mid$9)-----------------------------(26$\mid$26)--------------------------------(31$\mid$14)\\
+		 -----------------------------(25$\mid$26) ---------------------------(31{\tt*Skip this comparison})\\
+		 ---------------------------------------------------(26$\mid$31)-------------------------------------\\
+		 -----------------------------------------------------(31)---------------------------------------\\\\
+	   \par Here you can see that each iteration where there are only n/2 comparisons. Each (A$\mid$B) denotes a comparison of A and B. The 		result of which element was greater is then passed down to the next iteration. Note that on the third iteration there is nothing to 		compare 31, so sit gets skipped and it is just passed on to the next iteration. This is also because we are only allowed to do n/2 			comparisons on each level so on the third iteration we can only do 3/2 comparisons which is 1.5 so it just moves on to the next 			iteration.  
+    \pagebreak	
+    \item (3 pts) Derive and prove a tight bound on the asymptotic runtime of this algorithm
+        % YOUR ANSWER HERE
+    \pagebreak	
+    \item (3 pts) Assuming you just ran the above algorithm, show that you can
+    use the result and all intermediate steps to find the 2nd largest number in
+    at most $\log_{2}n$ additional operations.
+    	% YOUR ANSWER HERE
+    \pagebreak	
+    \item (2 pts) Show the steps for the algorithm in part c for the input in
+    part a.
+    	% YOUR ANSWER HERE
+    \pagebreak	
+\end{enumerate}
+
+\item  Consider the following algorithm
+\begin{small}
+    \begin{verbatim}
+    SomeSort(A, k):
+        N = length(A)
+        for i in [0,..,n-k]
+            MergeSort(A,i,i+k-1)
+    \end{verbatim}
+\end{small}
+\begin{enumerate}
+    \item What assumption(s) must be true about the array {\tt A} such that 
+        {\tt SomeSort} can correctly sort {\tt A} given {\tt k}.\\\\ 
+    \begin{itemize}
+    	\item For this function to work we must assume that k 						\textgreater 0 AND k != length(A).
+		\item We can assume that A[1,...,n] is a list of numbers, 1 $\leq$ k $\leq$ n where both k and n are natural numbers.
+		\item This immediately implies the precondition of SomeSort(A[1,...,n]) because A[1,...,n] is an array of numbers with n as a natural number
+    \end{itemize}
+    \pagebreak	
+    \item Prove that your assumption(s) is/are necessary: that is, for 
+        {\bf any} array {\tt A} which violates your assumption(s), 
+        {\tt SomeSort} incorrectly sorts {\tt A}.\\
+        \begin{itemize}
+    		\item If k $\leq$ 0, the for loop will loop from 0 to n. As we call Merge Sort from the first iteration of the for loop we have i= 				  0 and i + k -1 = 0 + 0 -1. So this sets the right index of the sort to a negative value which does not exist, therefore, 					  causing an error. 
+			\item If k $\geq$ n then the for loop will not loop at all because the for loop runs from 0 to n - k. If k = length(A) then the 				  for loop will run from 0 to 0 resulting in no code being executed inside of the for loop.
+		\end{itemize}
+    \pagebreak	
+    \item Prove that your assumption(s) from part a are sufficient. That is,
+          prove the correctness of {\tt SomeSort} under your assumption(s) from
+          part a.
+        \begin{itemize}
+        	\item First we assume that k $\textgreater$ 0 AND k != length(A) is true. 
+        \end{itemize}
+    	    \pagebreak	
+    \item Assuming that the assumption(s) from part a hold on {\tt A}, prove a
+          tight bound in terms of {\tt n} and {\tt k} on the worst-case runtime
+          of {\tt SomeSort}.
+    	% YOUR ANSWER HERE
+    \pagebreak	
+\end{enumerate}
+
+\item A dynamic array is a data structure that can support an arbitrary number
+    of append (add to the end) operations by allocating additional memory when
+    the array becomes full. The standard process is to double (adds n more
+    space) the size of the array each time it becomes full. You cannot assume
+    that this additional space is available in the same block of memory as the
+    original array, so the dynamic array must be copied into a new array of
+    larger size. Here we consider what happens when we modify this process. The
+    operations that the dynamic array supports are 
+\begin{itemize}
+    \item {\tt Indexing A[i]}: returns the {\tt i}-th element in the array
+    \item {\tt Append(A,x)}: appends {\tt x} to the end of the array.  If the
+          array had {\tt n} elements in it (and we are using 0-based indexing),
+          then after {\tt Append(A, x)}, we have that {\tt A[n]} is {\tt x}.
+\end{itemize}
+
+\begin{enumerate}
+    \item Derive the amortized runtime of Append for a dynamic array that adds 
+        $n/2$ more space when it becomes full.
+    	% YOUR ANSWER HERE
+    \pagebreak	
+    \item Derive the amortized runtime of Append for a dynamic array that adds
+        $n^2$ more space when it becomes full. 
+    	% YOUR ANSWER HERE
+    \pagebreak	
+    \item Derive the amortized runtime of Append for a dynamic array that adds
+        some constant $C$ amount of space when it becomes full.
+    	% YOUR ANSWER HERE
+    \pagebreak	
+\end{enumerate}
+
+\end{enumerate}
+\end{document}

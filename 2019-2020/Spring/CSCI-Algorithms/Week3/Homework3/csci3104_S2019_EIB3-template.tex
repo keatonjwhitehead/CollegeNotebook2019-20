@@ -1,0 +1,41 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage[]{algorithmicx}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+%\usepackage{hyperref}
+
+
+\setlength{\headsep}{36pt}
+
+\begin{document}
+
+\lhead{{\bf CSCI 3104, Algorithms \\ Explain-It-Back 3} }
+\rhead{Name: \fbox{\phantom{This is a really long name}} \\ ID: \fbox{\phantom{This is a student ID}} \\ {\bf Profs.\ Grochow \& Layer\\ Spring 2019, CU-Boulder}}
+\renewcommand{\headrulewidth}{0.5pt}
+
+\phantom{Test}
+
+You colleagues in the meteorology department need your help scaling their weather prediction capabilities to a wider area. They explain that weather prediction involves dividing the forecast region into a grid, computing a short-term prediction for each cell in the grid based on conditions from weather sensors, then combining those results for region-wide forecast. Right now they start in the top left cell of the grid, then proceed right cell by cell, then row by row, until a prediction has been made in every cell. They then go back over the grid and consolidate the forecasts in a 2x2 cell square starting in the top left and moving right across the grid two cells at a time (i.e., the squares do not overlap). This is then repeated several more times considering ever larger squares, until they have one final prediction. Their department has invested in a new large multi-processor computer to help them make predictions over larger areas, but they do not know how to utilize all of these new processors since the computation of individual cells, or groups of cells, cannot be efficiently computed by multiple CPUs. Help them understand how a new divide-and-conquer strategy may help them better leverage the power of their new hardware without adding extra work to the overall solution.
+
+NOTE: For simplicity, assume that there is no direct processor-to-processor communication. A CPU gathers data stored in a cell or group of cells, runs a program on that data, and writes the result back to the same cell/cells which can then be read by some other processor. There are many real-world strategies for coordinating work among many processors. The one we assume here is similar to what is used in the map-reduce/Hadoop framework.
+
+
+
+\pagebreak
+
+\newpage
+\mbox{}
+\newpage
+\pagebreak
+\end{document}
+
+
