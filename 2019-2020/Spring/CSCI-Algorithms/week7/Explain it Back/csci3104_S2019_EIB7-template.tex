@@ -1,0 +1,49 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage[]{algorithmicx}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+%\usepackage{hyperref}
+
+
+\setlength{\headsep}{36pt}
+
+\begin{document}
+
+\lhead{{\bf CSCI 3104, Algorithms \\ Explain-It-Back 7} }
+\rhead{Name: \fbox{Keaton Whitehead} \\ ID: \fbox{104668391} \\ {\bf Profs.\ Grochow \& Layer\\ Spring 2019, CU-Boulder}}
+\renewcommand{\headrulewidth}{0.5pt}
+
+\phantom{Test}
+Explain dynamic programming to a biology major---what it is, how it works, and why it is valuable.
+
+Dynamic Programming: A way of making your algorithm more efficient by storing some of the intermediate results so that you do not have to repeat calculations over and over again.
+
+There are three types of dynamic programs that you can use to make your algorithms more efficient:\\
+\tab {\bf 1.~Recursion }\\
+\tab~-~This is the algorithm that calls itself with slightly different inputs each time eventually leading to a base case.\\
+\tab {\bf 2.~Store(Memoize)}\\
+\tab ~-~You use this algorithm if you notice that there are repeated calculations. You can store the values of these repeated calculations in a list so that they can be accessed instead of going through repetitive calculations. The list you store them is considered a memoized list. \\
+\tab ~-~Think of this as you writing down the results of you experiment on a sticky note and you keep all your sticky notes in a list so that when you conduct a new experiment you can just look to your results on the sticky notes so that you don't have to re-test to get your data. So it is just like writing a quick memo to you in the future when you need to look at it, hints why its called Memoize. \\
+\tab {\bf 3.~Bottom-up}\\
+\tab ~-~ This is used when you already have a table of data and you want to find the optimal path on how the data is related between two points. You start at the very end of the data table and then choose a path that is most optimal bu just comparing the current data location to its neighbors. 
+
+Dynamic programming is important because they are being used in today's sciences. For example it is being used in Biology to help find a cure for HIV. Scientist have been able to examine DNA strands in monkeys who are resistant to the HIV virus and located the position of DNA strands that mutated the cells in a way to reject the HIV virus. They did this by analyzing the DNA with a dynamic programming algorithm called multiple sequence alignment. Then they were able to apply this to human cells and found that it was actually able to repel the HIV virus in human Cells!
+
+
+
+
+
+\mbox{}
+\newpage
+\pagebreak
+\end{document}
