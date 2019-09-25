@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.dot {
+  stroke: #000;
+}
+
+</style>
+<body>
+<!--Import the D3 Library (version 4 in this case)-->
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<!--Source: https://bl.ocks.org/sebg/6f7f1dd55e0c52ce5ee0dac2b2769f4b-->
+<script>
+
+// Set up the bounds of the visualization
+var margin = {top:20, right:20, bottom:30, left:40}
+var height = 500 - margin.top - margin.bottom;
+var width = 960 - margin.left - margin.right;
+
+// Set up the scales (the pieces that will convert from the data to the screen)
+var x = d3.scaleLinear()
+     .range([0, width]);
+
+var y = d3.scaleLinear()
+     .range([heigt, 0]);
+
+// Set up the scaffolds
+var xAxis = d3.axisBottom(x);
+var yAxis = d3.axisLeft(y);
+// Set up an SVG that gives us a canvas to draw on
+
+
+// Import the data. Most of the drawing code goes in here.
+d3.csv("shakespeare_top100.csv", function(error, data) {
+  if (error) throw error;
+
+  // Loop through the data and convert the numeric columns to numbers
+    // We can treat data as an object with brackets
+
+    // Or using dot notation
+
+    // Print things out to double check that everything looks ok
+  });
+
+  // Create some variables that let us hold the different columns we'll want to index into
+
+  // Specify the bounds on the scales now that we have some data
+
+  // Specify the parameters on the x-axis and draw it
+
+  // Specify the parameters on the y-axis and draw it
+
+  // Specify the parameters of a mark
+
+});
+
+</script>

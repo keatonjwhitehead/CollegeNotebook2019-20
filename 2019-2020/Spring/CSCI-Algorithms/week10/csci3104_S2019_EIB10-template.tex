@@ -1,0 +1,53 @@
+\documentclass[12pt]{article}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{0in}
+\setlength{\textwidth}{6.5in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{\baselineskip}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage{graphicx}
+\usepackage[]{algorithmicx}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+
+%\usepackage{hyperref}
+
+
+\setlength{\headsep}{36pt}
+
+\begin{document}
+
+\lhead{{\bf CSCI 3104, Algorithms \\ Explain-It-Back 10} }
+\rhead{Name: \fbox{Keaton Whitehead} \\ ID: \fbox{104668391} \\ {\bf Profs.\ Grochow \& Layer\\ Spring 2019, CU-Boulder}}
+\renewcommand{\headrulewidth}{0.5pt}
+
+\phantom{Test}
+One of your colleagues studies the foraging patterns in ants and wants to
+better characterize the movements of a particular colony. Her graduate students
+have already performed aerial surveys of the routes these ants use, and she
+wants to know how many sensors she needs to best capture the ebb and flow of
+the colony. While many ants go in and out from the various tunnel entrances,
+they are most interested in tracking those ants that venture all the way to end
+of the surveyed routes. Explain to your colleague how this problem can be
+modeled as a flow network and how algorithms on these networks could help
+inform where to place the sensors.
+\\
+\\
+Hello fellow colleague,
+\\
+\\
+Now that you have conducted the aerial surveys of the routes of the ants we can now begin to figure out the best places to place the sensors. This is where my algorithms will come in handy. Rather than brute force the placement of the sensors to find the most optimal location we can simply model the flow of the ants as a flow network. What is a flow network you might ask? A flow network  is a directed graph where each edge has a capacity and each edge receives a flow. The amount of flow on an edge cannot exceed the capacity of the edge. So when the capacity is reached it will overflow into a different path. As you can see this is exactly what ants will do when they march out from the ant hill.
+\\
+\\
+They will all follow each other creating a "flow" and when the max capacity of ants are on a particular route they will naturally branch out and create a new path to optimize the amount of surface area that they can travel. The cool part is that this actually is a near perfect flow with in a network. Now given these paths I can use the Min-cut Max Flow algorithm which will calculate the most necessary route for the ants to take, and this is where we will want to place the sensors to optimize your results. This algorithm finds these paths by looking for paths where if the network did not have a certain path the entire flow would almost reduce to zero, or do the most amount of hinderance to slowing the flow of the ants. Think of it as identifying all the highways in a state, removing them and seeing which ones create the most traffic jams. 
+\\
+\\
+This will help you minimize the amount of sensors you need to use and will allow you to only focus on the important paths the ants are taking. There is one thing you need to note however, this algorithm only works with paths that are well established paths. So do not implement this path if the ants are searching for food because they move in random patterns and will do so until food is found and word has spread among the colony. Anyways I hope this has shed some light on what my algorithm will do and if you are still confused please feel free to contact me if you need more explanation. 
+\\
+\\
+Keaton Whitehead
+\mbox{}
+\newpage
+\pagebreak
+\end{document}
